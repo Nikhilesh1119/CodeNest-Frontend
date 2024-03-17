@@ -60,20 +60,12 @@ export async function addquestion(data) {
   return await axios.post(`${baseURL}/question/addquestion`, data);
 }
 
-// export async function questionpertag(tagname) {
-//   return await axios.get(`${baseURL}/question/fetchQuePertag/${tagname}`);
-// }
-
 export async function getvotes() {
   return await axios.get(`${baseURL}/question/getallvotes`);
 }
 
 export async function getAllQuestions() {
   return await axios.get(`${baseURL}/question/getquestions`);
-}
-
-export async function questionByHighVotes() {
-  return await axios.get(`${baseURL}/question/getquestionbyhighvotes`);
 }
 
 export async function questionById(id) {
