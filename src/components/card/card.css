@@ -29,4 +29,7 @@ h2 {
 }
 .card__copy {
   padding: 20px;
+  display: flex;
+  text-align: center;
+  margin: 10px;
 }
