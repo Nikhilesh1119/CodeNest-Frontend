@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Row, Col, Card, Button, Container } from "react-bootstrap";
 import { register } from "../../api/api";
 import { toast, Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { authAction } from "../../store/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Register() {
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.auth.login);
   const [user, setuser] = useState({ username: "", email: "", password: "" });
 
   const handleChange = (e) => {
@@ -26,9 +26,9 @@ export default function Register() {
         localStorage.setItem("username", user.username);
         localStorage.setItem("since", month + " " + date.getFullYear());
         toast.success("User Registered Successfully");
-        dispatch(authAction.login(res.data.result.userid));
+        // dispatch(login(res.data.result.userid));
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1000);
       } else {
         toast.error(res.data.message);

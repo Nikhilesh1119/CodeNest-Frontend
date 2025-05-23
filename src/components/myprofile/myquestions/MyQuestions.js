@@ -55,16 +55,20 @@ export default function MyQuestions() {
         <ProfileHeader />
 
         <div className="filters_menu">
-        <form onSubmit={(e) => fetchAllFilteredQuestions(e)}>
+          <form onSubmit={(e) => fetchAllFilteredQuestions(e)}>
             <strong Style="display:inline">
-            Find your questions between :{" "}
+              Find your questions between :{" "}
             </strong>
             <input type="date" name="startDate" onChange={onChange} />
             <strong Style="display:inline">To</strong>
             <input type="date" name="endDate" onChange={onChange} />
             <button
               type="submit"
-              style={{ width: "80px", borderRadius: "40px",marginLeft:"30px" }}
+              style={{
+                width: "80px",
+                borderRadius: "40px",
+                marginLeft: "30px",
+              }}
             >
               Search
             </button>
@@ -72,7 +76,11 @@ export default function MyQuestions() {
         </div>
         <div className="questions">
           <div className="question">
-            <Posts posts={questions} key={questions._id} />
+            <Posts
+              posts={questions}
+              key={questions._id}
+              fetch={() => getUserQuestions()}
+            />
           </div>
         </div>
       </div>

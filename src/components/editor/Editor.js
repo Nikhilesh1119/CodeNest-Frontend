@@ -41,17 +41,32 @@ export default function Editor(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const body = value.replace(/<\/?p>/g, "");
+      const strippedBody = value
+        .replace(/<\/?p>/g, "")
+        .replace(/<br\s*\/?>/gi, "") // remove <br> or <br/>
+        .trim();
+        
       const username = localStorage.getItem("username");
+      if (!question?.title) {
+        return toast.error("Title is required");
+      }
+      if (!strippedBody) {
+        return toast.error("Please write content in code editor");
+      }
+      if (!question?.tags) {
+        return toast.error("Tag is required");
+      }
       const res = await addquestion({
         title: question.title,
-        question: body,
+        question: strippedBody,
         tags: question.tags,
         username,
       });
-      if (res.data.statusCode === 200) {
-        toast.success("Question added successfully");
-        navigate("/questions");
+      if (res?.data?.statusCode === 200) {
+        toast.success(res?.data?.result);
+        setTimeout(() => {
+          navigate("/questions");
+        }, 2000);
       } else {
         toast.error(res.data.message);
       }

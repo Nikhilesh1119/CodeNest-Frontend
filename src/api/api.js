@@ -3,7 +3,7 @@ import axios from "axios";
 export const KEY_ACCESS_TOKEN = "access_token";
 export const baseURL = "http://localhost:4000/api";
 
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+axios.defaults.headers.common["authorization"] = `Bearer ${localStorage.getItem(
   KEY_ACCESS_TOKEN
 )}`;
 

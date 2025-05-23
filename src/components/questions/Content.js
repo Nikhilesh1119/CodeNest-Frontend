@@ -158,7 +158,7 @@ export default function Content() {
     });
     toast.success(res.data.message);
     window.scrollTo(0,0);
-    fetchAnswers(params.type);
+    fetchQuestion(params.type);
   };
 
 

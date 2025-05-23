@@ -20,12 +20,15 @@ function Login() {
     e.preventDefault();
     try {
       const res = await login(user);
-      if (res.data.statusCode === 200) {
+      // console.log(res);
+
+      if (res?.data?.statusCode === 200) {
+        const data = res?.data?.result;
         toast.success("User Loggedin Successfully");
         setTimeout(() => {
-          localStorage.setItem(KEY_ACCESS_TOKEN, res.data.result.accessToken);
-          localStorage.setItem("username", res.data.result.user);
-          dispatch(authAction.login(res.data.result.userid));
+          localStorage.setItem(KEY_ACCESS_TOKEN, data?.accessToken);
+          localStorage.setItem("username", data?.user);
+          dispatch(authAction.login(data?.userid));
           navigate("/");
         }, 1000);
       } else {

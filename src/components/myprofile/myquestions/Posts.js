@@ -6,7 +6,7 @@ import "../../header/Header.css";
 import { toast, Toaster } from "react-hot-toast";
 import { deletequestion, findNumberOfAns, getvotes } from "../../../api/api";
 
-export default function Posts({ posts }) {
+export default function Posts({ posts, fetch }) {
   const [noOfAns, setnoOfAns] = useState({});
   const [vote, setVotes] = useState({});
 
@@ -14,6 +14,7 @@ export default function Posts({ posts }) {
     const res = await deletequestion(id);
     toast.success(res.data.status);
     window.scrollTo(0, 0);
+    fetch();
   };
 
   const FindFrequencyOfAns = async () => {
@@ -35,8 +36,8 @@ export default function Posts({ posts }) {
     <>
       <Toaster position="top-center" />
       <ul>
-        {posts.map((question) => (
-          <div className="all-questions">
+        {posts.map((question, i) => (
+          <div key={i} className="all-questions">
             <div className="all-questions-container">
               <div className="all-questions-left">
                 <div className="all-options">
@@ -58,7 +59,8 @@ export default function Posts({ posts }) {
               </div>
 
               <div className="question-answer">
-                <NavLink to={{ pathname: `/answer/${question._id}` }}
+                <NavLink
+                  to={{ pathname: `/answer/${question._id}` }}
                   className="card-title"
                   style={{ color: "#0074CC" }}
                 >
@@ -70,14 +72,18 @@ export default function Posts({ posts }) {
                       style={{ padding: "5px", color: "#0074CC" }}
                       className="fa fa-edit"
                       aria-hidden="true"
-                    >update Question</i>
+                    >
+                      update Question
+                    </i>
                   </NavLink>
                   <NavLink onClick={() => deleteQue(question._id)}>
                     <i
                       style={{ padding: "25px", color: "#0074CC" }}
                       className="fa fa-trash"
                       aria-hidden="true"
-                    >Delete Question</i>
+                    >
+                      Delete Question
+                    </i>
                   </NavLink>
                 </div>
                 <div style={{ width: "90%" }}>
@@ -86,8 +92,9 @@ export default function Posts({ posts }) {
                   </small>
                 </div>
                 <div className="mt-3">
-                  {question.tags.split(" ").map((tag) => (
+                  {question.tags.split(" ").map((tag, i) => (
                     <span
+                      key={i}
                       className="question-tags"
                       style={{
                         color: "hsl(205,47%,42%",

@@ -4,15 +4,16 @@ import { gettag } from "../../api/api";
 
 export default function Tags() {
   const [tags, setTags] = useState([
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-    { tagname: "java", tagdesc: "programming lang" },
-  ]);
+  { tagname: "java", tagdesc: "A high-level, class-based programming language" },
+  { tagname: "javascript", tagdesc: "The language of the web for frontend and backend" },
+  { tagname: "python", tagdesc: "A versatile language great for AI and data science" },
+  { tagname: "react", tagdesc: "A JavaScript library for building user interfaces" },
+  { tagname: "nodejs", tagdesc: "JavaScript runtime for server-side applications" },
+  { tagname: "css", tagdesc: "Stylesheet language used for describing the presentation of a document" },
+  { tagname: "html", tagdesc: "Standard markup language for creating web pages" },
+  { tagname: "sql", tagdesc: "Language for managing and querying relational databases" },
+]);
+
 
   // const fetchtags = async () => {
   //   const tag = await gettag();
@@ -41,7 +42,7 @@ export default function Tags() {
         }}
       >
         {tags.map((tag) => (
-          <Card style={{ minWidth: "18rem", marginBottom: "10px" }}>
+          <Card style={{ minWidth: "25%", width:'25%', marginBottom: "10px" }}>
             <Card.Body>
               <Card.Title>{tag.tagname}</Card.Title>
               <Card.Text>{tag.tagdesc}</Card.Text>

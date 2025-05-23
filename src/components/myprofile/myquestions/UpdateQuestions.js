@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import JoditEditor from "jodit-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { questionById, updatequestion } from "../../../api/api";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -25,6 +25,7 @@ const config = {
 };
 export default function UpdateQuestion() {
   const params = useParams();
+  const navigate = useNavigate();
   const editor = useRef(null);
   const [value, setValue] = useState("");
   const [credentials, setCredentials] = useState({ title: "", tags: "" });
@@ -47,6 +48,7 @@ export default function UpdateQuestion() {
     });
     toast.success(res.data.status);
     window.scrollTo(0, 0);
+    navigate(-1);
   };
 
   const getValue = (value) => {
@@ -64,7 +66,7 @@ export default function UpdateQuestion() {
   return (
     <div>
       <div Style="background-color:#f8f9f9; height:100%; margin-top:10vh; z-index:1;">
-        <Toaster/>
+        <Toaster />
         <div
           className="container mb-5"
           Style="width:70%; display:block; margin:auto;"
